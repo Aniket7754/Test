@@ -17,7 +17,6 @@ const v1Routes = require("./v1/routes");
 const PORT =process.env.PORT
 
 
-app.use(cors());
 app.use(responses());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
