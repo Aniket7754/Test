@@ -8,7 +8,7 @@ const Controller = require("../controllers/test");
 router.post("/signup",Controller.signup);
 router.post("/login",Controller.login);
 
-router.get("/calculate",Controller.calculate);
+router.post("/calculate",Controller.calculate);
 
 
 
