@@ -5,7 +5,6 @@ const express = require("express");
 
 const app = require("./server").expressApp;
 const server = require("./server").httServer;
-const cors = require("cors");
 
 
 
@@ -16,7 +15,8 @@ const v1Routes = require("./v1/routes");
 
 const PORT =process.env.PORT
 
-
+const cors = require("cors");
+app.use(cors());
 app.use(responses());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
