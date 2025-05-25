@@ -8,11 +8,7 @@ const DocSchema = new Schema(
     phone: { type: Number,  index: true, },
     username: { type: String,  index: true, },
     password: { type: String },
-    username: { type: String },
-    username: { type: String },
-    username: { type: String },
-    username: { type: String },
-  
+    type:{ type: String, enum:["DATA"] ,index: true, },
   },
 
   {

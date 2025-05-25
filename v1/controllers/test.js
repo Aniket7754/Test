@@ -52,15 +52,60 @@ module.exports.login = async (req, res, next) => {
 
 
 module.exports.calculate = async (req, res, next) => {
-    try {
-        const { UserName } = req?.query
-        if (!UserName) return res.error(400, "UserName")
+  try {
+    const { Items, containerweight,  originport, destinationport } = req.body;
 
-        const GetData = await Model.Test.findOne({ UserName: UserName })
-        console.log({ GetData })
-        return res.success("data Get Sucessfully", GetData)
-
-    } catch (error) {
-        next(error)
+    if (!Items || !Array.isArray(Items) || Items.length === 0) {
+      return res.error(400, "Items are required and must be a non-empty array.");
     }
-} 
+
+    if (!containerweight || !originport || !destinationport) {
+      return res.error(400, "containerweight, originport, and destinationport are required.");
+    }
+
+    let totalCBM = 0;
+    let totalWeight = 0;
+
+    Items.forEach(item => {
+      const { dimensions, weight, quantity } = item;
+
+      if (!dimensions || weight == null || quantity == null) {
+        throw new Error("Each item must have dimensions, weight, and quantity.");
+      }
+
+      const cbm = dimensions.w * dimensions.h * dimensions.L * quantity;
+      const itemWeight = weight * quantity;
+
+      totalCBM += cbm;
+      totalWeight += itemWeight;
+    });
+
+    const remainingWeight = containerweight - totalWeight;
+
+    // Charges (customize these as needed)
+    const fuelCharge = totalWeight * 0.5;
+    const portFees = 50;
+    const documentationFees = 30;
+    const totalCharges = fuelCharge + portFees + documentationFees;
+
+    // Save to MongoDB
+    const savedDoc = await Model.CAL.create({
+      items: Items,
+      containerweight,
+      originport,
+      destinationport,
+      totalCBM,
+      totalWeight,
+      remainingWeight,
+      fuelCharge,
+      portFees,
+      documentationFees,
+      totalCharges
+    });
+
+    return res.success("Calculation and save successful", savedDoc);
+
+  } catch (error) {
+    next(error);
+  }
+};
