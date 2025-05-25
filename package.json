@@ -1,0 +1,48 @@
+{
+  "name": "simplyfy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "index.js",
+    "dev": "nodemon index.js",
+    "pm2": "pm2 start index.js --name \"simplyfy\""
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+   
+    "agenda": "^4.1.3",
+    "apn": "^1.6.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "cron-job": "^1.0.3",
+    "csv-writer": "^1.6.0",
+    "decode-uri-component": "^0.4.1",
+    "dotenv": "^8.2.0",
+    "elasticsearch": "^16.7.3",
+    "event-stream": "^4.0.1",
+    "exceljs": "^4.3.0",
+    "express": "^4.17.1",
+    "fast-csv": "^4.3.6",
+    "file-type": "^16.3.0",
+    "flat": "^5.0.2",
+    "flatten": "^1.0.3",
+    "got": "^11.8.2",
+    "http": "^0.0.1-security",
+    "joi": "^17.3.0",
+    "jsonexport": "^3.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "mkdirp": "^0.5.5",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.0",
+    "node-schedule": "^2.0.0",
+    "nodemailer": "^6.4.17",
+    "nodemon": "^2.0.6",
+    "redis": "3.1.2",
+    "remove-node-modules": "^1.7.6",
+    "request": "^2.88.2"
+   
+  }
+}
